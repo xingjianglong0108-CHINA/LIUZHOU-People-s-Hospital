@@ -1,0 +1,5 @@
+{
+  "name": "SCCCG 智能专家顾问",
+  "description": "基于华南地区儿童癌症协作组 (SCCCG) 最新方案的儿科血液肿瘤决策助手，包含 AML, ALL, APL 和 CML 的风险评估、剂量计算及 AI 诊疗咨询功能。",
+  "requestFramePermissions": []
+}
