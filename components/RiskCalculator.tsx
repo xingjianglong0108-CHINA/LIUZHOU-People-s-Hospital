@@ -53,16 +53,24 @@ const RiskCalculator: React.FC = () => {
     }));
   };
 
+  const inputClass = "w-full bg-gray-100/50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#007AFF] transition-all outline-none";
+  const labelClass = "block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1 ml-1";
+
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-bold mb-6 text-blue-800">快速评估与计算</h2>
+    <div className="glass-panel rounded-3xl p-8 ios-shadow">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-10 h-10 bg-[#007AFF]/10 rounded-full flex items-center justify-center text-[#007AFF]">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2-2V19a2 2 0 002 2z"></path></svg>
+        </div>
+        <h2 className="text-xl font-bold tracking-tight text-gray-900">参数化评估</h2>
+      </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">主要诊断</label>
+            <label className={labelClass}>主要诊断</label>
             <select 
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
               value={data.diagnosis}
               onChange={(e) => setData({...data, diagnosis: e.target.value as any, geneticMarkers: []})}
             >
@@ -75,43 +83,48 @@ const RiskCalculator: React.FC = () => {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">年龄 (岁)</label>
-              <input type="number" className="w-full border border-gray-300 rounded-md px-3 py-2" value={data.age} onChange={(e) => setData({...data, age: Number(e.target.value)})}/>
+              <label className={labelClass}>年龄 (岁)</label>
+              <input type="number" className={inputClass} value={data.age} onChange={(e) => setData({...data, age: Number(e.target.value)})}/>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">初诊 WBC (×10⁹/L)</label>
-              <input type="number" className="w-full border border-gray-300 rounded-md px-3 py-2" value={data.wbcCount} onChange={(e) => setData({...data, wbcCount: Number(e.target.value)})}/>
+              <label className={labelClass}>WBC (×10⁹/L)</label>
+              <input type="number" className={inputClass} value={data.wbcCount} onChange={(e) => setData({...data, wbcCount: Number(e.target.value)})}/>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">身高 (cm)</label>
-              <input type="number" className="w-full border border-gray-300 rounded-md px-3 py-2" value={data.height} onChange={(e) => setData({...data, height: Number(e.target.value)})}/>
+              <label className={labelClass}>身高 (cm)</label>
+              <input type="number" className={inputClass} value={data.height} onChange={(e) => setData({...data, height: Number(e.target.value)})}/>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">体重 (kg)</label>
-              <input type="number" className="w-full border border-gray-300 rounded-md px-3 py-2" value={data.weight} onChange={(e) => setData({...data, weight: Number(e.target.value)})}/>
+              <label className={labelClass}>体重 (kg)</label>
+              <input type="number" className={inputClass} value={data.weight} onChange={(e) => setData({...data, weight: Number(e.target.value)})}/>
             </div>
           </div>
 
-          <div className="p-4 bg-blue-50 rounded-lg">
-             <div className="text-sm text-blue-600 font-semibold uppercase tracking-wider">计算结果 (BSA)</div>
-             <div className="text-3xl font-bold text-blue-800">{bsa} <span className="text-lg">m²</span></div>
+          <div className="p-6 bg-[#007AFF] rounded-3xl text-white flex justify-between items-center shadow-lg shadow-blue-500/20">
+             <div>
+               <div className="text-[10px] font-bold opacity-70 uppercase tracking-widest">体表面积 (BSA)</div>
+               <div className="text-3xl font-black mt-1">{bsa} <span className="text-sm font-medium">m²</span></div>
+             </div>
+             <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path d="M7 12h2v5H7zm4-7h2v12h-2zm4 4h2v8h-2z"/></svg>
+             </div>
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">细胞遗传学/分子生物学标记</label>
-          <div className="flex flex-wrap gap-2 max-h-64 overflow-y-auto border border-gray-100 p-2 rounded-lg">
+        <div className="flex flex-col">
+          <label className={labelClass}>基因与分子标记</label>
+          <div className="flex flex-wrap gap-2 mb-8 bg-gray-50/50 p-4 rounded-2xl border border-dashed border-gray-200 min-h-[120px] content-start">
             {GENETIC_OPTIONS[data.diagnosis].map(marker => (
               <button
                 key={marker}
                 onClick={() => toggleMarker(marker)}
-                className={`px-3 py-1.5 rounded-full text-xs transition-colors ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
                   data.geneticMarkers.includes(marker) 
-                  ? 'bg-blue-600 text-white shadow-md' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-[#007AFF] text-white shadow-md scale-105' 
+                  : 'bg-white text-gray-500 border border-gray-200 hover:border-[#007AFF]'
                 }`}
               >
                 {marker}
@@ -119,17 +132,18 @@ const RiskCalculator: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-6 border-t pt-6">
-            <div className="text-sm text-gray-500 mb-1">初步评估结论</div>
-            <div className={`text-lg font-bold p-3 rounded-lg ${
-              assessment.level === 'Favorable' || assessment.level === 'Low' ? 'bg-green-100 text-green-800' :
-              assessment.level === 'Adverse' || assessment.level === 'High' ? 'bg-red-100 text-red-800' :
-              'bg-yellow-100 text-yellow-800'
+          <div className="mt-auto bg-gray-50/80 rounded-3xl p-6 border border-gray-100">
+            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">初步分层建议</div>
+            <div className={`text-xl font-black p-4 rounded-2xl inline-block ${
+              assessment.level === 'Favorable' || assessment.level === 'Low' ? 'text-green-600 bg-green-50' :
+              assessment.level === 'Adverse' || assessment.level === 'High' ? 'text-red-600 bg-red-50' :
+              'text-amber-600 bg-amber-50'
             }`}>
               {assessment.level}: {assessment.description}
             </div>
-            <div className="mt-2 text-sm text-gray-600">
-              推荐方案：<span className="font-semibold">{assessment.recommendedProtocol}</span>
+            <div className="mt-4 flex items-center gap-2 text-sm text-gray-600 font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#007AFF]"></span>
+              推荐方案：<span className="text-[#007AFF]">{assessment.recommendedProtocol}</span>
             </div>
           </div>
         </div>

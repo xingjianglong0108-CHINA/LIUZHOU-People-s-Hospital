@@ -5,7 +5,7 @@ import { generateProtocolResponse } from '../services/geminiService';
 
 const ChatAssistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'assistant', content: '您好，我是 SCCCG 智能专家顾问。我可以为您提供基于协作组最新 AML/ALL/APL/CML 方案的诊疗建议、剂量查询和风险评估参考。请问有什么可以帮您？' }
+    { role: 'assistant', content: '您好，我是 SCCCG 智能专家顾问。请提供患者信息，我将为您调取协作组 AML/ALL/APL 方案的特定建议。' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,29 +29,36 @@ const ChatAssistant: React.FC = () => {
       const response = await generateProtocolResponse([...messages, userMsg]);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (e) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "系统错误，请检查网络或 API 配置。" }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "网络超时或 API 配置异常，请刷新页面重试。" }]);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-[600px] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="bg-blue-800 p-4 text-white flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="font-bold">AI 诊疗决策咨询</span>
+    <div className="flex flex-col h-[650px] glass-panel rounded-3xl ios-shadow overflow-hidden border-none">
+      <div className="glass-panel sticky top-0 z-10 px-6 py-4 flex items-center justify-between border-b border-gray-200/30">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <div className="w-10 h-10 bg-gradient-to-tr from-[#007AFF] to-[#5856D6] rounded-full flex items-center justify-center text-white shadow-md">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            </div>
+            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
+          </div>
+          <div>
+            <span className="block text-sm font-bold text-gray-900 leading-none">AI 专家顾问</span>
+            <span className="text-[10px] text-gray-400 font-medium">Gemini-3-Pro 真人式响应</span>
+          </div>
         </div>
-        <span className="text-xs opacity-70">基于 Gemini-3-Pro 驱动</span>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 bg-white/30">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl p-4 text-sm leading-relaxed shadow-sm ${
+            <div className={`max-w-[85%] px-5 py-3 text-[13px] leading-relaxed shadow-sm ${
               msg.role === 'user' 
-              ? 'bg-blue-600 text-white rounded-tr-none' 
-              : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+              ? 'bg-[#007AFF] text-white rounded-2xl rounded-tr-none font-medium' 
+              : 'glass-panel text-gray-800 rounded-2xl rounded-tl-none border-gray-100'
             }`}>
               {msg.content}
             </div>
@@ -59,36 +66,38 @@ const ChatAssistant: React.FC = () => {
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-white border border-gray-100 rounded-2xl rounded-tl-none p-4 shadow-sm">
-              <div className="flex gap-1">
-                <div className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce"></div>
-                <div className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce delay-75"></div>
-                <div className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce delay-150"></div>
+            <div className="glass-panel px-5 py-4 rounded-2xl rounded-tl-none shadow-sm">
+              <div className="flex gap-1.5">
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
               </div>
             </div>
           </div>
         )}
       </div>
 
-      <div className="p-4 border-t bg-white">
-        <div className="flex gap-2">
+      <div className="p-6 bg-white/50 border-t border-gray-100">
+        <div className="relative group">
           <input 
             type="text" 
-            className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="询问方案，例如：'AML-2025方案中低危组诱导剂量？'..."
+            className="w-full bg-white border border-gray-200 rounded-2xl pl-5 pr-14 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#007AFF] focus:border-transparent transition-all shadow-inner"
+            placeholder="询问方案细节，如剂量、解救点..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           />
           <button 
             onClick={handleSend}
-            disabled={loading}
-            className="bg-blue-800 text-white rounded-full p-2 w-10 h-10 flex items-center justify-center hover:bg-blue-700 disabled:opacity-50 transition-all"
+            disabled={loading || !input.trim()}
+            className="absolute right-2 top-2 bg-[#007AFF] text-white rounded-xl w-10 h-10 flex items-center justify-center hover:bg-blue-600 disabled:opacity-30 disabled:grayscale transition-all shadow-lg active:scale-90"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
           </button>
         </div>
-        <p className="text-[10px] text-gray-400 mt-2 text-center">注意：AI 生成的内容仅供临床决策参考，请务必核对协作组正式方案全文。</p>
+        <p className="text-[9px] text-gray-400 mt-3 text-center leading-tight">
+          重要提示：AI 建议仅供医疗参考。临床决策请务必核实协作组纸质版正式方案。
+        </p>
       </div>
     </div>
   );
