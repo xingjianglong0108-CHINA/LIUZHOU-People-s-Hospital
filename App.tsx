@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import RiskCalculator from './components/RiskCalculator';
 import ChatAssistant from './components/ChatAssistant';
 import ProtocolLibrary from './components/ProtocolLibrary';
-import CollaborativeUnits from './components/CollaborativeUnits';
 import { PROTOCOL_BRIEFS } from './constants';
 
-type TabType = 'workbench' | 'protocols' | 'units';
+type TabType = 'workbench' | 'protocols';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('workbench');
@@ -37,12 +36,6 @@ const App: React.FC = () => {
               className={`text-sm font-medium h-full px-2 transition-all border-b-2 ${activeTab === 'protocols' ? 'text-blue-800 border-blue-800' : 'text-gray-500 border-transparent hover:text-blue-800'}`}
             >
               方案库
-            </button>
-            <button 
-              onClick={() => setActiveTab('units')}
-              className={`text-sm font-medium h-full px-2 transition-all border-b-2 ${activeTab === 'units' ? 'text-blue-800 border-blue-800' : 'text-gray-500 border-transparent hover:text-blue-800'}`}
-            >
-              协作单位
             </button>
           </nav>
         </div>
@@ -95,7 +88,6 @@ const App: React.FC = () => {
         )}
 
         {activeTab === 'protocols' && <ProtocolLibrary />}
-        {activeTab === 'units' && <CollaborativeUnits />}
       </main>
 
       {/* Footer */}

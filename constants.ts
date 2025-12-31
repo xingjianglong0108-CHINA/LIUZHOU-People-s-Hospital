@@ -33,10 +33,11 @@ export const GENETIC_OPTIONS = {
 };
 
 export const PROTOCOL_BRIEFS = {
-  AML: "SCCCG-AML-2025: 强调精准分层。诱导方案随机分 IDA 组和 Lipo-MA 组。巩固方案包含 CDA + AraC。",
-  ALL: "SCCCG-ALL-2023: 包含 LR, IR, HR 分层。LR 方案取消部分 VCR+Dex 维持，IR/HR 引入贝林妥欧单抗。",
-  APL: "SCCCG-APL-2024: 全反式维甲酸 (ATRA) 联合砷剂 (RIF/ATO) 诱导，高危组加用 IDA/VEN。",
-  CML: "SCCCG-CML-2023: 针对 TKI 治疗及 TFR (无治疗缓解) 的停药指南。首选尼洛替尼或达沙替尼。"
+  AML: "SCCCG-AML-2025: 强调精准分层。诱导方案随机分 IDA 组和 Lipo-MA 组。",
+  ALL: "SCCCG-ALL-2023: 包含 LR, IR, HR 分层。LR 方案取消部分 VCR+Dex 维持。",
+  APL: "SCCCG-APL-2024: 全反式维甲酸 (ATRA) 联合砷剂 (RIF/ATO) 诱导。",
+  CML: "SCCCG-CML-2023: 针对 TKI 治疗及 TFR 的停药指南。首选尼洛替尼或达沙替尼。",
+  APL_Relapse: "SCCCG-APL复发方案: 强调砷剂联合再诱导及分层维持治疗。"
 };
 
 export const DETAILED_PROTOCOLS = [
@@ -72,50 +73,41 @@ export const DETAILED_PROTOCOLS = [
       '分子生物学缓解 (PML-RARα) 的长期监测标准'
     ],
     status: '现行'
+  },
+  {
+    id: 'APL-Relapse',
+    title: 'SCCCG-APL复发治疗方案 (修改稿3)',
+    target: '复发性儿童 APL 患者',
+    updates: [
+      '基于分子生物学 vs 血液学复发的差异化处理',
+      '砷剂 (ATO/RIF) 联合 ATRA 的再诱导标准路径',
+      '复发后缓解患者的造血干细胞移植 (HSCT) 评估时机'
+    ],
+    status: '现行'
+  },
+  {
+    id: 'CML-2023',
+    title: 'SCCCG-CML-2023 治疗方案',
+    target: '儿童慢性粒细胞白血病',
+    updates: [
+      '二代 TKI (尼洛替尼/达沙替尼) 的一线应用指引',
+      '严格的 TFR (无治疗缓解) 停药门槛与密集监测流程',
+      'BCR-ABL1 IS 国际标准化的分子生物学监测频率'
+    ],
+    status: '现行'
   }
 ];
 
+// Added missing COLLABORATIVE_UNITS constant for unit listing and filtering
 export const COLLABORATIVE_UNITS = [
-  {
-    name: '中山大学附属第一医院',
-    region: '广东·广州',
-    role: '主席单位 / 组长单位',
-    specialty: '血液肿瘤全流程管理'
-  },
-  {
-    name: '中山大学孙逸仙纪念医院',
-    region: '广东·广州',
-    role: '副组长单位',
-    specialty: '组织管理与数据协调'
-  },
-  {
-    name: '广州市妇女儿童医疗中心',
-    region: '广东·广州',
-    role: '核心成员单位',
-    specialty: 'ALL 临床研究中心'
-  },
-  {
-    name: '南方医科大学南方医院',
-    region: '广东·广州',
-    role: '核心成员单位',
-    specialty: '造血干细胞移植中心'
-  },
-  {
-    name: '广西医科大学第一附属医院',
-    region: '广西·南宁',
-    role: '地区协调单位',
-    specialty: '地中海贫血相关血液病'
-  },
-  {
-    name: '海南省人民医院',
-    region: '海南·海口',
-    role: '成员单位',
-    specialty: '综合诊疗'
-  },
-  {
-    name: '香港大学玛丽医院',
-    region: '香港',
-    role: '国际交流协作单位',
-    specialty: '基因诊断与精准医疗'
-  }
+  { name: '中山大学附属第一医院', province: '广东', city: '广州', specialty: '儿科血液科' },
+  { name: '中山大学孙逸仙纪念医院', province: '广东', city: '广州', specialty: '儿科血液肿瘤中心' },
+  { name: '南方医科大学南方医院', province: '广东', city: '广州', specialty: '儿科血液病科' },
+  { name: '广州市妇女儿童医疗中心', province: '广东', city: '广州', specialty: '血液肿瘤科' },
+  { name: '深圳市儿童医院', province: '广东', city: '深圳', specialty: '血液肿瘤科' },
+  { name: '香港玛丽医院', province: '香港', city: '香港', specialty: '儿童及青少年科' },
+  { name: '香港威尔斯亲王医院', province: '香港', city: '香港', specialty: '儿科' },
+  { name: '澳门镜湖医院', province: '澳门', city: '澳门', specialty: '儿科' },
+  { name: '广西医科大学第一附属医院', province: '广西', city: '南宁', specialty: '儿科血液科' },
+  { name: '海南省人民医院', province: '海南', city: '海口', specialty: '儿科' },
 ];
