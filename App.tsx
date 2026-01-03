@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import RiskCalculator from './components/RiskCalculator';
-import ChatAssistant from './components/ChatAssistant';
-import ProtocolLibrary from './components/ProtocolLibrary';
-import { PROTOCOL_BRIEFS } from './constants';
+import RiskCalculator from './components/RiskCalculator.tsx';
+import ChatAssistant from './components/ChatAssistant.tsx';
+import ProtocolLibrary from './components/ProtocolLibrary.tsx';
+import CollaborativeUnits from './components/CollaborativeUnits.tsx';
+import { PROTOCOL_BRIEFS } from './constants.ts';
 
-type TabType = 'workbench' | 'protocols';
+type TabType = 'workbench' | 'protocols' | 'network';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('workbench');
@@ -26,7 +27,8 @@ const App: React.FC = () => {
           <nav className="hidden md:flex items-center gap-1">
             {[
               { id: 'workbench', label: '工作台' },
-              { id: 'protocols', label: '方案库' }
+              { id: 'protocols', label: '方案库' },
+              { id: 'network', label: '协作网络' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -99,23 +101,20 @@ const App: React.FC = () => {
         )}
 
         {activeTab === 'protocols' && <ProtocolLibrary />}
+        {activeTab === 'network' && <CollaborativeUnits />}
       </main>
 
       {/* Footer */}
       <footer className="mt-auto py-8 text-center text-gray-400 text-xs px-4">
         <p>© 2024 SCCCG 华南地区儿童癌症协作组 | 泛华南临床决策支持系统 v1.5</p>
-        <div className="mt-4 flex justify-center gap-6">
-          <button className="hover:text-[#007AFF]">隐私政策</button>
-          <button className="hover:text-[#007AFF]">使用条款</button>
-          <button className="hover:text-[#007AFF]">技术支持</button>
-        </div>
       </footer>
 
       {/* iOS Mobile Bottom Tab Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 glass-panel h-20 px-6 flex items-center justify-center gap-16 z-[100] border-t border-gray-200/50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 glass-panel h-20 px-6 flex items-center justify-center gap-12 z-[100] border-t border-gray-200/50">
         {[
           { id: 'workbench', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', label: '工作台' },
-          { id: 'protocols', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', label: '方案库' }
+          { id: 'protocols', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', label: '方案库' },
+          { id: 'network', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', label: '网络' }
         ].map(tab => (
           <button 
             key={tab.id}

@@ -1,6 +1,5 @@
-
 import React, { useState, useMemo } from 'react';
-import { COLLABORATIVE_UNITS } from '../constants';
+import { COLLABORATIVE_UNITS } from '../constants.ts';
 
 const CollaborativeUnits: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');

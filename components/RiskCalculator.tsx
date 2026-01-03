@@ -1,7 +1,6 @@
-
 import React, { useState, useMemo } from 'react';
-import { PatientData, RiskCategory } from '../types';
-import { GENETIC_OPTIONS } from '../constants';
+import { PatientData, RiskCategory } from '../types.ts';
+import { GENETIC_OPTIONS } from '../constants.ts';
 
 const RiskCalculator: React.FC = () => {
   const [data, setData] = useState<PatientData>({

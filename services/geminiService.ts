@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { ChatMessage } from "../types";
+import { ChatMessage } from "../types.ts";
 
 const SYSTEM_INSTRUCTION = `
 你是一名世界级的儿科血液肿瘤专家，专门针对 SCCCG (华南地区儿童癌症协作组) 的方案提供建议。

@@ -1,7 +1,6 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { ChatMessage } from '../types';
-import { generateProtocolResponse } from '../services/geminiService';
+import { ChatMessage } from '../types.ts';
+import { generateProtocolResponse } from '../services/geminiService.ts';
 
 const ChatAssistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
