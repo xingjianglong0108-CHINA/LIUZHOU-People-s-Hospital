@@ -41,6 +41,10 @@ const RiskCalculator: React.FC = () => {
        return { level: 'Intermediate', description: '需结合诱导后 MRD 进一步判断', recommendedProtocol: 'ALL-2023 IR/HR Protocols' };
     }
 
+    if (data.diagnosis === 'CML') {
+      return { level: 'Intermediate', description: '需根据 IS 国际标准监测分期', recommendedProtocol: 'SCCCG-CML-2023' };
+    }
+
     return { level: 'None', description: '待评估', recommendedProtocol: 'N/A' };
   }, [data]);
 

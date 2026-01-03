@@ -1,12 +1,10 @@
-
 import React, { useState } from 'react';
 import RiskCalculator from './components/RiskCalculator';
 import ChatAssistant from './components/ChatAssistant';
 import ProtocolLibrary from './components/ProtocolLibrary';
-import CollaborativeUnits from './components/CollaborativeUnits';
 import { PROTOCOL_BRIEFS } from './constants';
 
-type TabType = 'workbench' | 'protocols' | 'units';
+type TabType = 'workbench' | 'protocols';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('workbench');
@@ -28,8 +26,7 @@ const App: React.FC = () => {
           <nav className="hidden md:flex items-center gap-1">
             {[
               { id: 'workbench', label: '工作台' },
-              { id: 'protocols', label: '方案库' },
-              { id: 'units', label: '协作单位' }
+              { id: 'protocols', label: '方案库' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -102,7 +99,6 @@ const App: React.FC = () => {
         )}
 
         {activeTab === 'protocols' && <ProtocolLibrary />}
-        {activeTab === 'units' && <CollaborativeUnits />}
       </main>
 
       {/* Footer */}
@@ -116,11 +112,10 @@ const App: React.FC = () => {
       </footer>
 
       {/* iOS Mobile Bottom Tab Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 glass-panel h-20 px-6 flex items-center justify-between z-[100] border-t border-gray-200/50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 glass-panel h-20 px-6 flex items-center justify-center gap-16 z-[100] border-t border-gray-200/50">
         {[
           { id: 'workbench', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', label: '工作台' },
-          { id: 'protocols', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', label: '方案库' },
-          { id: 'units', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', label: '单位' }
+          { id: 'protocols', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', label: '方案库' }
         ].map(tab => (
           <button 
             key={tab.id}

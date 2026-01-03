@@ -1,9 +1,5 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { ChatMessage } from "../types";
-
-// Note: Initialization is moved inside the function call to ensure process.env.API_KEY 
-// always reflects the most recent user-selected key or environment state.
 
 const SYSTEM_INSTRUCTION = `
 你是一名世界级的儿科血液肿瘤专家，专门针对 SCCCG (华南地区儿童癌症协作组) 的方案提供建议。
@@ -30,25 +26,22 @@ const SYSTEM_INSTRUCTION = `
 
 export const generateProtocolResponse = async (history: ChatMessage[]) => {
   try {
-    // Always use a new instance with the latest process.env.API_KEY before making a call.
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const contents = history.map(msg => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
+      role: msg.role === "assistant" ? "model" : "user",
       parts: [{ text: msg.content }]
     }));
 
-    // Use gemini-3-pro-preview for complex medical reasoning tasks.
     const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview',
+      model: "gemini-3-pro-preview",
       contents: contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 0.2,
-      },
+        temperature: 0.2
+      }
     });
 
-    // Directly access the .text property of GenerateContentResponse.
     return response.text || "抱歉，我现在无法生成回答。";
   } catch (error) {
     console.error("Gemini Error:", error);

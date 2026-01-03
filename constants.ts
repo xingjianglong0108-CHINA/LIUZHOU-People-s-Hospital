@@ -1,4 +1,3 @@
-
 export const GENETIC_OPTIONS = {
   AML: [
     't(8;21)(q22;q22.1)',
@@ -98,7 +97,6 @@ export const DETAILED_PROTOCOLS = [
   }
 ];
 
-// Added missing COLLABORATIVE_UNITS constant for unit listing and filtering
 export const COLLABORATIVE_UNITS = [
   { name: '中山大学附属第一医院', province: '广东', city: '广州', specialty: '儿科血液科' },
   { name: '中山大学孙逸仙纪念医院', province: '广东', city: '广州', specialty: '儿科血液肿瘤中心' },
@@ -109,5 +107,5 @@ export const COLLABORATIVE_UNITS = [
   { name: '香港威尔斯亲王医院', province: '香港', city: '香港', specialty: '儿科' },
   { name: '澳门镜湖医院', province: '澳门', city: '澳门', specialty: '儿科' },
   { name: '广西医科大学第一附属医院', province: '广西', city: '南宁', specialty: '儿科血液科' },
-  { name: '海南省人民医院', province: '海南', city: '海口', specialty: '儿科' },
+  { name: '海南省人民医院', province: '海南', city: '海口', specialty: '儿科' }
 ];
